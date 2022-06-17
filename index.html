@@ -5,17 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- External CSS File -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <!-- Bootsrap CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
     <title>Task List</title>
 <script defer src="bundle.js"></script></head>
 <body>
     <div class="container">
+        <!-- Heading -->
         <header class="text-center text-light my-4">
             <h1 class="mb-4">Task List</h1>
             <input type="text" class="form-control m-auto" placeholder="search todos">
         </header> 
+        <!-- Task List -->
+        <ul class="list-group todos mx-auto text-light">
+           <!-- List of Todo Tasks Goes here -->
+        </ul>
+        <!-- Input Form -->
+        <form class="add text-center my-4">
+            <label class="text-light">Add a new todo...</label>
+            <input type="text" class="form-control m-auto" name="add">
+        </form>
     </div>
 </body>
 </html>
