@@ -13,7 +13,9 @@
 
 ## Live Demo
 
-- [App Live Link](https://killy10o10.github.io/ToDo-List/dist/)
+- [App Live Link](https://killy10o10.github.io/task-list/)
+- [Video Demo](https://youtu.be/tN6Aw3JUt0M)
+
 
 ## Getting Started
 
