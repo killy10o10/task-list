@@ -3,43 +3,33 @@ import './styles/main.scss';
 const addForm = document.querySelector('.add');
 const listContainer = document.querySelector('.todos');
 const search = document.querySelector('.search input');
+const list = JSON.parse(localStorage.getItem('todo')) || []; // Retrieve tasks from Local Storage
 
 class Todo {
-  constructor(index, description, completed = false) {
-    this.index = index;
+  constructor(description) {
+    this.index = list.length + 1;
     this.description = description;
-    this.completed = completed;
+    this.completed = false;
   }
 }
+
 // Local Storage
-// Function to retrieve tasks from Local Storage
-function getToDoList() {
-  let list;
-  if (localStorage.getItem('todo') === null) {
-    list = [];
-  } else {
-    list = JSON.parse(localStorage.getItem('todo'));
-  }
-  return list;
-}
 // Function to add tasks to Local Storage
 function addToDoToLocalStorage(todo) {
-  const list = getToDoList();
   list.push(todo);
   localStorage.setItem('todo', JSON.stringify(list));
 }
 
 // Function to delete a task from Local storage
 function removeTask(id) {
-  const list = getToDoList();
   list.forEach((listItem, index) => {
     if (id === listItem.index) {
       list.splice(index, 1);
     }
   });
-  list.forEach((listItem, index) => {
-    listItem.index = index + 1;
-  });
+  // list.forEach((listItem, index) => {
+  //   listItem.index = index + 1;
+  // });
   localStorage.setItem('todo', JSON.stringify(list));
 }
 // Generate Todos Dynamically
@@ -54,20 +44,15 @@ addForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const todoInput = addForm.add.value.trim();
   if (todoInput.length) {
-    const list = getToDoList();
-    const newTodo = new Todo();
-    newTodo.description = todoInput;
-    newTodo.index = list.length + 1;
+    const newTodo = new Todo(todoInput);
     generateTemplate(newTodo);
-    // Set local Storage
-    addToDoToLocalStorage(newTodo);
+    addToDoToLocalStorage(newTodo); // Set local Storage
     addForm.reset();
   }
 });
 
 // Function to show Tasks in UI From Localstorage
 function displayTasks() {
-  const list = getToDoList();
   list.forEach((listItem) => {
     generateTemplate(listItem);
   });
@@ -79,9 +64,9 @@ document.addEventListener('DOMContentLoaded', displayTasks);
 // Delete Todos
 listContainer.addEventListener('click', (e) => {
   const currentList = e.target.closest('.list-group-item');
+  const index = currentList.querySelector('span').textContent;
   if (e.target.classList.contains('delete')) {
     e.target.parentElement.remove(); // we can also remove it like this => currentList.remove();
-    const index = currentList.querySelector('span').textContent;
     removeTask(Number(index));
   }
 });
